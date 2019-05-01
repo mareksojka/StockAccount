@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy Stocks
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('buy') }}" method="POST">
+        <fieldset>
+            <div class="form-group">
+				<label for="ticker">Ticker</label>
+                <input autocomplete="off" autofocus class="form-control" name="ticker" placeholder="ticker" type="text"/>
+            </div>
+			<div class="form-group">
+				<label for="exchange">Exchange</label>
+                <select autocomplete="New York" id="exchange" class="form-control" name="exchange" placeholder="exchange" type="text"/>
+				<datalist id="exchanges">
+					<option value="New York">New York</option>
+					<option value="London">London</option>
+					<option value="Warsaw">Warsaw</option>
+					<option value="Frankfurt">Frankfurt</option>
+					<option value="Milan">Milan</option>
+				</select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Get Quote</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

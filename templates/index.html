@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{user[0]['username']}}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="col-lg-10">
+		<h2>User {{user[0]['username']}}</h2>
+	</div>
+	<div class="col-lg-2">
+		<div class="btn-group">
+		  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Action
+		  </button>
+		  <div class="dropdown-menu">
+			<a class="dropdown-item" href="#">Action</a>
+			<a class="dropdown-item" href="#">Another action</a>
+			<a class="dropdown-item" href="#">Something else here</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#">Separated link</a>
+		  </div>
+		</div>
+	</div>
+</div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Cash in account</th>
+                <th>{{"%0.2f"|format(cash)}}</th>
+            </tr>
+            <tr>
+                <th>Stocks total value</th>
+                <th>{{"%0.2f"|format(stocks_total)}}</th>
+            </tr>
+            <tr>
+                <th>Account total value</th>
+                <th>{{"%0.2f"|format(account_total)}}</th>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <th>Symbol</th>
+            <th>Name</th>
+			<th>Exchange</th>
+            <th>Shares</th>
+            <th>Price</th>
+			<th>Currency</th>
+            <th>TOTAL</th>
+        </thead>
+        <tbody>
+            {% for item in stocks %}
+            <tr>
+                <th>{{item["ticker"]}}</th>
+                <th>{{item["name"]}}</th>
+				<th>{{item["exchange"]}}</th>
+                <th>{{item["sum(number)"]}}</th>
+                <th>{{"%0.2f"|format(item["price"])}}</th>
+				<th>{{item["currency"]}}</th>
+                <th>{{"%0.2f"|format(item["total"])}}</th>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	<div class="jambotron">
+		<div class="col-lg-2"> Add Funds to account</div>
+			<form action="{{ url_for('index') }}" method="POST">
+				<fieldset>
+					<div class="form-group col-lg-2">
+						<input autocomplete="off" autofocus class="form-control" name="amount" placeholder="amount" type="text"/>
+					</div>
+					<div class="form-group col-lg-2">
+						<button class="btn btn-default" type="submit">Add Funds</button>
+					</div>
+				</fieldset>
+			</form>
+	</div>
+{% endblock %}

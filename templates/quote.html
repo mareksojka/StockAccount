@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('quote') }}" method="POST">
+        <fieldset>
+            <div class="form-group">
+				<label for="ticker">Ticker</label>
+                <input autocomplete="off" autofocus class="form-control" name="ticker" placeholder="ticker" type="text"/>
+            </div>
+			<div class="form-group">
+				<label for="exchange">Exchange</label>
+                <select autocomplete="New York" id="exchange" class="form-control" name="exchange" placeholder="exchange" type="text"/>
+				<datalist id="exchanges">
+					<option value="New York">New York</option>
+					<option value="London">London</option>
+					<option value="Warsaw">Warsaw</option>
+					<option value="Frankfurt">Frankfurt</option>
+					<option value="Milan">Milan</option>
+				</select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Get quote</button>
+            </div>
+        </fieldset>
+    </form>
+	<table class="table">
+        <thead>
+            <th>Name</th>
+            <th>Symbol</th>
+			<th>Exchange</th>
+            <th>Price</th>
+			<th>Currency</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th>{{stock['name']}}</th>
+                <th>{{stock['symbol']}}</th>
+				<th>{{stock['exchange']}}</th>
+                <th>{{stock['price']}}</th>
+				<th>{{stock['currency']}}</th>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
